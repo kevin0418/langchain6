@@ -1,5 +1,8 @@
 import streamlit as st
 import tiktoken
+
+OPENAI_API_KEY = st.secrets["api_keys"]["my_api_key"]
+
 from loguru import logger
 
 from langchain.chains import ConversationalRetrievalChain
@@ -36,9 +39,9 @@ def main():
 
     with st.sidebar:
         uploaded_files =  st.file_uploader("Upload your file",type=['pdf','docx'],accept_multiple_files=True)
-        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+        #openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+        openai_api_key = OPENAI_API_KEY
        
-    
         process = st.button("Process")
     if process:
         if not openai_api_key:
